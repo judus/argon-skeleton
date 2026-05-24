@@ -1,0 +1,6 @@
+/.env
+/vendor/
+/composer.lock
+/.phpunit/
+/storage/cache/*
+!/storage/cache/.gitkeep
