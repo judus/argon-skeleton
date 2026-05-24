@@ -10,6 +10,9 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
+/**
+ * @psalm-api
+ */
 final class AboutCommand extends Command
 {
     public function __construct(
@@ -29,9 +32,9 @@ final class AboutCommand extends Command
     {
         $parameters = $this->container->getParameters();
 
-        $output->writeln(sprintf('<info>%s</info>', $parameters->get('app.name', 'Argon App')));
-        $output->writeln(sprintf('Environment: %s', $parameters->get('app.env', 'production')));
-        $output->writeln(sprintf('Version: %s', $parameters->get('app.version', 'UNKNOWN')));
+        $output->writeln(sprintf('<info>%s</info>', (string) $parameters->get('app.name', 'Argon App')));
+        $output->writeln(sprintf('Environment: %s', (string) $parameters->get('app.env', 'production')));
+        $output->writeln(sprintf('Version: %s', (string) $parameters->get('app.version', 'UNKNOWN')));
 
         return Command::SUCCESS;
     }

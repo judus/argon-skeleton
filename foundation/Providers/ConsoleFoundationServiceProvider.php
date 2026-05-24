@@ -16,8 +16,8 @@ final class ConsoleFoundationServiceProvider extends AbstractServiceProvider
     {
         $parameters = $container->getParameters();
 
-        $parameters->set('console.name', $parameters->get('app.name', 'Argon Console'));
-        $parameters->set('console.version', $parameters->get('app.version', 'UNKNOWN'));
+        $parameters->set('console.name', (string) $parameters->get('app.name', 'Argon Console'));
+        $parameters->set('console.version', (string) $parameters->get('app.version', 'UNKNOWN'));
 
         $container->register(ConsoleServiceProvider::class);
 

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<psalm
+        errorLevel="1"
+        resolveFromConfigFile="true"
+        totallyTyped="true"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="https://getpsalm.org/schema/config"
+        xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+        xsi:noNamespaceSchemaLocation="vendor/vimeo/psalm/config.xsd"
+
+        findUnusedBaselineEntry="true"
+        findUnusedCode="true"
+>
+    <projectFiles>
+        <directory name="foundation"/>
+        <directory name="src"/>
+        <directory name="tests"/>
+        <directory name="bootstrap"/>
+        <directory name="config"/>
+        <directory name="public"/>
+        <directory name="routes"/>
+        <file name="server.php"/>
+        <file name="bin/console"/>
+        <ignoreFiles>
+            <directory name="vendor"/>
+            <directory name=".phpunit"/>
+            <directory name="storage"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <issueHandlers>
+        <DeprecatedMethod errorLevel="error"/>
+        <DeprecatedClass errorLevel="error"/>
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <directory name="tests"/>
+            </errorLevel>
+        </UnusedClass>
+    </issueHandlers>
+</psalm>

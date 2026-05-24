@@ -14,6 +14,9 @@ use Psr\Http\Message\StreamFactoryInterface;
 use Psr\Log\LoggerInterface;
 use Throwable;
 
+/**
+ * @psalm-api
+ */
 final readonly class AppExceptionPolicy implements ExceptionPolicyInterface
 {
     public function __construct(
@@ -60,7 +63,7 @@ final readonly class AppExceptionPolicy implements ExceptionPolicyInterface
             return $status >= 400 && $status <= 599 ? $status : 500;
         }
 
-        $code = $exception->getCode();
+        $code = (int) $exception->getCode();
 
         return $code >= 400 && $code <= 599 ? $code : 500;
     }

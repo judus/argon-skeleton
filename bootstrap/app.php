@@ -8,6 +8,7 @@ use Foundation\Providers\ErrorHandlingServiceProvider;
 use Foundation\Providers\HttpFoundationServiceProvider;
 use Foundation\Providers\RoutingServiceProvider;
 use Maduser\Argon\Container\ArgonContainer;
+use Maduser\Argon\Container\Contracts\ServiceProviderInterface;
 
 $basePath = dirname(__DIR__);
 
@@ -15,9 +16,8 @@ if (is_file($basePath . '/.env')) {
     Dotenv::createImmutable($basePath)->safeLoad();
 }
 
-/** @var array{name: string, env: string, debug: bool, version: string} $app */
 $app = require $basePath . '/config/app.php';
-/** @var list<class-string> $providers */
+/** @var list<class-string<ServiceProviderInterface>> $providers */
 $providers = require $basePath . '/config/providers.php';
 
 return static function (string $runtime) use ($app, $providers): Closure {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ruleset name="argon-skeleton-ruleset"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd"
+>
+    <description>Strict PHP coding standard for the Argon skeleton.</description>
+
+    <rule ref="PSR12"/>
+
+    <config name="installed_paths" value="vendor/slevomat/coding-standard"/>
+
+    <rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+        <properties>
+            <property name="spacesCountAroundEqualsSign" value="0"/>
+        </properties>
+    </rule>
+
+    <rule ref="SlevomatCodingStandard.Functions.UnusedParameter">
+        <exclude-pattern>*</exclude-pattern>
+    </rule>
+
+    <file>foundation/</file>
+    <file>src/</file>
+    <file>tests/</file>
+    <file>bootstrap/</file>
+    <file>config/</file>
+    <file>public/</file>
+    <file>routes/</file>
+    <file>server.php</file>
+    <file>bin/console</file>
+
+    <exclude-pattern>vendor/*</exclude-pattern>
+    <exclude-pattern>.phpunit/*</exclude-pattern>
+    <exclude-pattern>storage/*</exclude-pattern>
+</ruleset>

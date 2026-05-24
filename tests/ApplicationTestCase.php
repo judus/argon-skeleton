@@ -27,11 +27,17 @@ abstract class ApplicationTestCase extends TestCase
         return $container;
     }
 
+    /**
+     * @param array<string, string|string[]> $headers
+     */
     protected function get(string $path, array $headers = []): ResponseInterface
     {
         return $this->handle('GET', $path, $headers);
     }
 
+    /**
+     * @param array<string, string|string[]> $headers
+     */
     protected function handle(string $method, string $path, array $headers = []): ResponseInterface
     {
         $container = $this->boot('http');

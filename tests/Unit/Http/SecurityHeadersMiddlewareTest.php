@@ -18,6 +18,7 @@ final class SecurityHeadersMiddlewareTest extends TestCase
     {
         $middleware = new SecurityHeadersMiddleware();
         $response = $middleware->process(new ServerRequest(), new class implements RequestHandlerInterface {
+            #[\Override]
             public function handle(ServerRequestInterface $request): ResponseInterface
             {
                 return Response::text('ok');

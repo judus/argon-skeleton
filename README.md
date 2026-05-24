@@ -21,6 +21,16 @@ composer test
 composer check
 ```
 
+## Quality Gates
+
+```bash
+composer validate --strict
+composer check
+composer test:coverage
+composer psalm
+composer phpcs
+```
+
 ## Shape
 
 - `bootstrap/app.php` builds the runtime-specific container bootstrap.

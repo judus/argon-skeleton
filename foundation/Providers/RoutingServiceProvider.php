@@ -13,7 +13,6 @@ final class RoutingServiceProvider extends AbstractServiceProvider
     #[\Override]
     public function register(ArgonContainer $container): void
     {
-        /** @var RouterInterface $router */
         $router = $container->get(RouterInterface::class);
 
         $routes = require dirname(__DIR__, 2) . '/routes/web.php';
