@@ -22,6 +22,11 @@ final class HttpFoundationServiceProvider extends AbstractServiceProvider
         $container->set(LoggerInterface::class, NullLogger::class)->shared();
 
         $container->register([
+            ApplicationFoundationServiceProvider::class,
+            ErrorHandlingServiceProvider::class,
+        ]);
+
+        $container->register([
             HttpMessageServiceProvider::class,
             MiddlewarePipelineServiceProvider::class,
             RouteServiceProvider::class,
@@ -30,5 +35,7 @@ final class HttpFoundationServiceProvider extends AbstractServiceProvider
 
         $container->set(SecurityHeadersMiddleware::class)
             ->tag(['middleware.http' => ['group' => 'web', 'priority' => 6100]]);
+
+        $container->register(AppRoutingServiceProvider::class);
     }
 }

@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use Closure;
+use Foundation\Providers\ConsoleFoundationServiceProvider;
+use Foundation\Providers\HttpFoundationServiceProvider;
+use InvalidArgumentException;
 use Maduser\Argon\Container\ArgonContainer;
 use Maduser\Argon\Contracts\Handler\AppHandlerInterface;
 use Maduser\Argon\Http\Kernel;
@@ -21,7 +23,14 @@ abstract class ApplicationTestCase extends TestCase
     protected function boot(string $runtime): ArgonContainer
     {
         $container = new ArgonContainer();
-        $this->bootstrap()($runtime)($container);
+
+        $provider = match ($runtime) {
+            'http' => HttpFoundationServiceProvider::class,
+            'console' => ConsoleFoundationServiceProvider::class,
+            default => throw new InvalidArgumentException(sprintf('Unsupported Argon runtime [%s].', $runtime)),
+        };
+
+        $container->register($provider);
         $container->boot();
 
         return $container;
@@ -67,16 +76,5 @@ abstract class ApplicationTestCase extends TestCase
             uri: new Uri($path),
             headers: $headers,
         );
-    }
-
-    /**
-     * @return Closure(string): Closure(ArgonContainer): void
-     */
-    private function bootstrap(): Closure
-    {
-        /** @var Closure(string): Closure(ArgonContainer): void $bootstrap */
-        $bootstrap = require dirname(__DIR__) . '/bootstrap/app.php';
-
-        return $bootstrap;
     }
 }

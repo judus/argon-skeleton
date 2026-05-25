@@ -14,6 +14,8 @@ final class ConsoleFoundationServiceProvider extends AbstractServiceProvider
     #[\Override]
     public function register(ArgonContainer $container): void
     {
+        $container->register(ApplicationFoundationServiceProvider::class);
+
         $parameters = $container->getParameters();
 
         $parameters->set('console.name', (string) $parameters->get('app.name', 'Argon Console'));

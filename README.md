@@ -33,7 +33,9 @@ composer phpcs
 
 ## Shape
 
-- `bootstrap/app.php` builds the runtime-specific container bootstrap.
+- `public/index.php` selects the HTTP runtime.
+- `bin/console` selects the console runtime.
+- `foundation/Providers/ApplicationFoundationServiceProvider.php` loads environment, config, and application providers.
 - `foundation/Providers/HttpFoundationServiceProvider.php` wires HTTP packages and default middleware.
 - `foundation/Providers/ConsoleFoundationServiceProvider.php` wires Symfony Console through Argon.
 - `foundation/Providers/ErrorHandlingServiceProvider.php` wires application exception handling.
@@ -46,14 +48,16 @@ composer phpcs
 
 ## Provider Order
 
-Application providers from `config/providers.php` are registered first. Runtime-specific foundation providers are registered afterward.
+Entrypoints register exactly one runtime foundation provider. Runtime providers register `ApplicationFoundationServiceProvider` first so `.env`, `config/app.php`, and application providers from `config/providers.php` are available before runtime-specific services are wired.
 
 For the HTTP runtime, order matters:
 
-1. `ErrorHandlingServiceProvider` registers exception policies.
-2. `HttpFoundationServiceProvider` registers HTTP messages, middleware, routing services, the HTTP kernel, and default middleware.
-3. `AppRoutingServiceProvider` loads application routes into the router.
+1. `ApplicationFoundationServiceProvider` loads environment/config and registers application providers.
+2. `ErrorHandlingServiceProvider` registers exception policies.
+3. HTTP message, middleware, routing, and kernel providers are registered.
+4. Default HTTP middleware is tagged.
+5. `AppRoutingServiceProvider` loads application routes into the router.
 
-For the console runtime, `ConsoleFoundationServiceProvider` registers Symfony Console and tagged commands.
+For the console runtime, `ApplicationFoundationServiceProvider` runs first, then `ConsoleFoundationServiceProvider` registers Symfony Console and tagged commands.
 
 Optional integrations such as Monolog, Twig, Eloquent, Doctrine, or Workflow should live in explicit integration packages or application providers. The skeleton does not install them implicitly.
