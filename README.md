@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/judus/argon-skeleton/branch/main/graph/badge.svg)](https://codecov.io/gh/judus/argon-skeleton)
 [![Psalm Level](https://shepherd.dev/github/judus/argon-skeleton/coverage.svg)](https://shepherd.dev/github/judus/argon-skeleton)
 [![Latest Version](https://img.shields.io/packagist/v/maduser/argon-skeleton.svg)](https://packagist.org/packages/maduser/argon-skeleton)
-[![Total Downloads](https://img.shields.io/packagist/dt/maduser/argon-skeleton.svg?color=blue)](https://packagist.org/packages/maduser/argon-skeleton)
+[![Total Downloads](https://poser.pugx.org/maduser/argon-skeleton/downloads)](https://packagist.org/packages/maduser/argon-skeleton)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Minimal application skeleton for the Argon runtime stack.
@@ -172,6 +172,7 @@ composer require maduser/argon-eloquent
 composer require maduser/argon-doctrine
 composer require maduser/argon-phinx
 composer require maduser/argon-filesystem
+composer require maduser/argon-workflows
 ```
 
 Available integration packages:
@@ -183,6 +184,7 @@ Available integration packages:
 - `maduser/argon-doctrine`: Doctrine ORM entity manager setup.
 - `maduser/argon-phinx`: Phinx migration commands for Argon Console.
 - `maduser/argon-filesystem`: named Flysystem disks and default filesystem binding.
+- `maduser/argon-workflows`: state-handler workflow runner for explicit application processes.
 
 Provider registration stays explicit:
 
@@ -219,7 +221,7 @@ This skeleton intentionally does not provide:
 - Docker or deployment/runtime infrastructure
 - cache, mail, queue, session, auth, or rate-limiting services
 - database, migration, filesystem, template, or ORM wiring by default
-- workflow integration
+- workflow wiring by default
 - route/config/provider file indirection
 - automatic package discovery
 
