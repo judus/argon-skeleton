@@ -35,12 +35,14 @@ composer phpcs
 
 - `public/index.php` selects the HTTP runtime.
 - `bin/console` selects the console runtime.
-- `foundation/Providers/ApplicationFoundationServiceProvider.php` loads environment, config, and application providers.
+- `foundation/Providers/AppServiceProvider.php` is the application service registration point.
 - `foundation/Providers/HttpFoundationServiceProvider.php` wires HTTP packages and default middleware.
 - `foundation/Providers/ConsoleFoundationServiceProvider.php` wires Symfony Console through Argon.
+- `foundation/Providers/LoggingServiceProvider.php` registers the default logger.
+- `foundation/Providers/MiddlewareServiceProvider.php` registers application middleware.
+- `foundation/Providers/ConsoleCommandServiceProvider.php` registers application console commands.
 - `foundation/Providers/ErrorHandlingServiceProvider.php` wires application exception handling.
 - `foundation/Providers/AppRoutingServiceProvider.php` loads `routes/web.php`.
-- `config/providers.php` is the explicit list for application service providers.
 - `src/` is intentionally empty for application code.
 - `tests/ApplicationTestCase.php` boots the real application container for integration tests.
 - `tests/Feature/` contains HTTP, console, and container-context integration examples.
@@ -48,16 +50,17 @@ composer phpcs
 
 ## Provider Order
 
-Entrypoints register exactly one runtime foundation provider. Runtime providers register `ApplicationFoundationServiceProvider` first so `.env`, `config/app.php`, and application providers from `config/providers.php` are available before runtime-specific services are wired.
+Entrypoints register exactly one runtime foundation provider. Runtime providers load their own environment/config and then register the provider graph in execution order.
 
 For the HTTP runtime, order matters:
 
-1. `ApplicationFoundationServiceProvider` loads environment/config and registers application providers.
+1. `HttpFoundationServiceProvider` loads environment/config and sets HTTP runtime parameters.
 2. `ErrorHandlingServiceProvider` registers exception policies.
 3. HTTP message, middleware, routing, and kernel providers are registered.
-4. Default HTTP middleware is tagged.
-5. `AppRoutingServiceProvider` loads application routes into the router.
+4. `AppServiceProvider` registers application services.
+5. `MiddlewareServiceProvider` tags application middleware.
+6. `AppRoutingServiceProvider` loads application routes into the router.
 
-For the console runtime, `ApplicationFoundationServiceProvider` runs first, then `ConsoleFoundationServiceProvider` registers Symfony Console and tagged commands.
+For the console runtime, `ConsoleFoundationServiceProvider` loads environment/config, registers Symfony Console, then registers application services and commands.
 
 Optional integrations such as Monolog, Twig, Eloquent, Doctrine, or Workflow should live in explicit integration packages or application providers. The skeleton does not install them implicitly.
