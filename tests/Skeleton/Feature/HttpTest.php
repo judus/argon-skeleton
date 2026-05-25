@@ -44,6 +44,16 @@ final class HttpTest extends ApplicationTestCase
         self::assertStringContainsString('No route matched: GET /missing', (string) $response->getBody());
     }
 
+    public function testMissingRouteCanRenderJsonErrorResponse(): void
+    {
+        $response = $this->get('/missing', ['Accept' => 'application/json']);
+
+        self::assertSame(404, $response->getStatusCode());
+        self::assertSame('application/json', $response->getHeaderLine('Content-Type'));
+        self::assertStringContainsString('"message":"No route matched: GET \\/missing"', (string) $response->getBody());
+        self::assertStringContainsString('"status":404', (string) $response->getBody());
+    }
+
     public function testRuntimeExceptionUsesApplicationExceptionPolicy(): void
     {
         $response = $this->get('/error');
@@ -54,5 +64,18 @@ final class HttpTest extends ApplicationTestCase
             'This exception was rendered by the application exception policy.',
             (string) $response->getBody(),
         );
+    }
+
+    public function testRuntimeExceptionCanRenderJsonErrorResponse(): void
+    {
+        $response = $this->get('/error', ['Accept' => 'application/json']);
+
+        self::assertSame(503, $response->getStatusCode());
+        self::assertSame('application/json', $response->getHeaderLine('Content-Type'));
+        self::assertStringContainsString(
+            '"message":"This exception was rendered by the application exception policy."',
+            (string) $response->getBody(),
+        );
+        self::assertStringContainsString('"status":503', (string) $response->getBody());
     }
 }
