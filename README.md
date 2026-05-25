@@ -46,9 +46,8 @@ composer phpcs
 - `foundation/Providers/AppRoutingServiceProvider.php` declares application routes and route groups.
 - The starter application ships only the `/` route; feature tests register their own test routes.
 - `src/` is intentionally empty for application code.
-- `tests/ApplicationTestCase.php` boots the real application container for integration tests.
-- `tests/Feature/` contains HTTP, console, and container-context integration examples.
-- `tests/Unit/` is available for isolated tests when that is the better fit.
+- `tests/Skeleton/` contains starter contract tests for the shipped skeleton.
+- `tests/Feature/` and `tests/Unit/` are reserved for application tests.
 
 ## Provider Order
 

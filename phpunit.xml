@@ -7,11 +7,12 @@
          cacheDirectory=".phpunit/cache">
 
     <testsuites>
-        <testsuite name="feature">
+        <testsuite name="application">
             <directory suffix="Test.php">tests/Feature/</directory>
-        </testsuite>
-        <testsuite name="unit">
             <directory suffix="Test.php">tests/Unit/</directory>
+        </testsuite>
+        <testsuite name="skeleton">
+            <directory suffix="Test.php">tests/Skeleton/</directory>
         </testsuite>
     </testsuites>
 

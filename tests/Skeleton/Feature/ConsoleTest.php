@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature;
+namespace Tests\Skeleton\Feature;
 
 use Symfony\Component\Console\Application;
-use Tests\ApplicationTestCase;
+use Tests\Skeleton\ApplicationTestCase;
 
 final class ConsoleTest extends ApplicationTestCase
 {

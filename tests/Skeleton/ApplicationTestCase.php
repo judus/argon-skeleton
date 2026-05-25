@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests;
+namespace Tests\Skeleton;
 
 use Foundation\Providers\ConsoleFoundationServiceProvider;
 use Foundation\Providers\HttpFoundationServiceProvider;
@@ -18,7 +18,7 @@ use Maduser\Argon\Support\Contracts\ErrorHandlerInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Tests\Support\Providers\TestRoutingServiceProvider;
+use Tests\Skeleton\Support\Providers\TestRoutingServiceProvider;
 use Throwable;
 
 abstract class ApplicationTestCase extends TestCase

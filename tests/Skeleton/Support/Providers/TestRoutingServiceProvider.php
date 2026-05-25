@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tests\Support\Providers;
+namespace Tests\Skeleton\Support\Providers;
 
 use Maduser\Argon\Container\AbstractServiceProvider;
 use Maduser\Argon\Container\ArgonContainer;
 use Maduser\Argon\Routing\Contracts\RouterInterface;
-use Tests\Support\Http\Controllers\ErrorController;
-use Tests\Support\Http\Controllers\HealthController;
+use Tests\Skeleton\Support\Http\Controllers\ErrorController;
+use Tests\Skeleton\Support\Http\Controllers\HealthController;
 
 final class TestRoutingServiceProvider extends AbstractServiceProvider
 {

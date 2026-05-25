@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tests\Unit\Http;
+namespace Tests\Skeleton\Unit\Http;
 
 use Foundation\Http\Middleware\SecurityHeadersMiddleware;
 use Maduser\Argon\Http\Message\Response;

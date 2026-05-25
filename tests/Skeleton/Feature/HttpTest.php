@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature;
+namespace Tests\Skeleton\Feature;
 
-use Tests\ApplicationTestCase;
+use Tests\Skeleton\ApplicationTestCase;
 
 final class HttpTest extends ApplicationTestCase
 {

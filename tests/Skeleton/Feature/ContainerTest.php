@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tests\Feature;
+namespace Tests\Skeleton\Feature;
 
 use InvalidArgumentException;
-use Tests\ApplicationTestCase;
+use Tests\Skeleton\ApplicationTestCase;
 
 final class ContainerTest extends ApplicationTestCase
 {
