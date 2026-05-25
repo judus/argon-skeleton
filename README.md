@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/judus/argon-skeleton/branch/main/graph/badge.svg)](https://codecov.io/gh/judus/argon-skeleton)
 [![Psalm Level](https://shepherd.dev/github/judus/argon-skeleton/coverage.svg)](https://shepherd.dev/github/judus/argon-skeleton)
 [![Latest Version](https://img.shields.io/packagist/v/maduser/argon-skeleton.svg)](https://packagist.org/packages/maduser/argon-skeleton)
-[![Total Downloads](https://img.shields.io/packagist/dt/maduser/argon-skeleton.svg)](https://packagist.org/packages/maduser/argon-skeleton)
+[![Total Downloads](https://img.shields.io/packagist/dt/maduser/argon-skeleton.svg?color=blue)](https://packagist.org/packages/maduser/argon-skeleton)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Minimal application skeleton for the Argon runtime stack.
