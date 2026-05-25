@@ -42,7 +42,7 @@ composer phpcs
 - `foundation/Providers/MiddlewareServiceProvider.php` registers application middleware.
 - `foundation/Providers/ConsoleCommandServiceProvider.php` registers application console commands.
 - `foundation/Providers/ErrorHandlingServiceProvider.php` wires application exception handling.
-- `foundation/Providers/AppRoutingServiceProvider.php` loads `routes/web.php`.
+- `foundation/Providers/AppRoutingServiceProvider.php` declares application routes and route groups.
 - `src/` is intentionally empty for application code.
 - `tests/ApplicationTestCase.php` boots the real application container for integration tests.
 - `tests/Feature/` contains HTTP, console, and container-context integration examples.
@@ -59,7 +59,7 @@ For the HTTP runtime, order matters:
 3. HTTP message, middleware, routing, and kernel providers are registered.
 4. `AppServiceProvider` registers application services.
 5. `MiddlewareServiceProvider` tags application middleware.
-6. `AppRoutingServiceProvider` loads application routes into the router.
+6. `AppRoutingServiceProvider` declares application routes and route groups.
 
 For the console runtime, `ConsoleFoundationServiceProvider` loads environment/config, registers Symfony Console, then registers application services and commands.
 

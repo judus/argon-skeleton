@@ -17,7 +17,6 @@
         <directory name="tests"/>
         <directory name="config"/>
         <directory name="public"/>
-        <directory name="routes"/>
         <file name="server.php"/>
         <file name="bin/console"/>
         <ignoreFiles>

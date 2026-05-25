@@ -4,12 +4,15 @@ declare(strict_types=1);
 
 namespace Foundation\Providers;
 
+use Foundation\Http\Controllers\ErrorController;
+use Foundation\Http\Controllers\HealthController;
+use Foundation\Http\Controllers\HomeController;
 use Maduser\Argon\Container\AbstractServiceProvider;
 use Maduser\Argon\Container\ArgonContainer;
 use Maduser\Argon\Routing\Contracts\RouterInterface;
 
 /**
- * Loads application route declarations into the already-registered router.
+ * Register application routes here.
  */
 final class AppRoutingServiceProvider extends AbstractServiceProvider
 {
@@ -18,8 +21,10 @@ final class AppRoutingServiceProvider extends AbstractServiceProvider
     {
         $router = $container->get(RouterInterface::class);
 
-        /** @var callable(RouterInterface): void $routes */
-        $routes = require dirname(__DIR__, 2) . '/routes/web.php';
-        $routes($router);
+        $router->group(['web'], '', static function (RouterInterface $router): void {
+            $router->get('/', HomeController::class, [], 'home');
+            $router->get('/health', HealthController::class, [], 'health');
+            $router->get('/error', ErrorController::class, [], 'error');
+        });
     }
 }
