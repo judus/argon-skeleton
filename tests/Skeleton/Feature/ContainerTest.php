@@ -9,27 +9,6 @@ use Tests\Skeleton\ApplicationTestCase;
 
 final class ContainerTest extends ApplicationTestCase
 {
-    /**
-     * @var array<non-empty-string, string|null>
-     */
-    private array $envBackup = [];
-
-    #[\Override]
-    protected function tearDown(): void
-    {
-        foreach ($this->envBackup as $key => $value) {
-            if ($value === null) {
-                unset($_ENV[$key]);
-
-                continue;
-            }
-
-            $_ENV[$key] = $value;
-        }
-
-        $this->envBackup = [];
-    }
-
     public function testApplicationParametersAreAvailableInContainer(): void
     {
         $container = $this->boot('http');
@@ -79,18 +58,5 @@ final class ContainerTest extends ApplicationTestCase
         $this->expectExceptionMessage('Unsupported Argon runtime [worker].');
 
         $this->boot('worker');
-    }
-
-    /**
-     * @param non-empty-string $key
-     */
-    private function setEnv(string $key, string $value): void
-    {
-        if (!array_key_exists($key, $this->envBackup)) {
-            $previous = $_ENV[$key] ?? null;
-            $this->envBackup[$key] = is_string($previous) ? $previous : null;
-        }
-
-        $_ENV[$key] = $value;
     }
 }

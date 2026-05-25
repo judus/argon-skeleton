@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+## [1.0.1] - 2026-05-25
+
+- Fixed skeleton contract tests so they do not depend on whether a user has copied `.env.example` to `.env`.
+
 ## [1.0.0] - 2026-05-25
 
 - Added the initial Argon application skeleton for Composer `create-project`.

@@ -24,6 +24,36 @@ use Throwable;
 abstract class ApplicationTestCase extends TestCase
 {
     /**
+     * @var array<non-empty-string, string|null>
+     */
+    private array $envBackup = [];
+
+    #[\Override]
+    protected function setUp(): void
+    {
+        $this->setEnv('APP_NAME', 'Argon App');
+        $this->setEnv('APP_ENV', 'production');
+        $this->setEnv('APP_DEBUG', 'false');
+        $this->setEnv('APP_VERSION', '0.1.0');
+    }
+
+    #[\Override]
+    protected function tearDown(): void
+    {
+        foreach ($this->envBackup as $key => $value) {
+            if ($value === null) {
+                unset($_ENV[$key]);
+
+                continue;
+            }
+
+            $_ENV[$key] = $value;
+        }
+
+        $this->envBackup = [];
+    }
+
+    /**
      * @throws ContainerException
      * @throws NotFoundException
      */
@@ -84,5 +114,18 @@ abstract class ApplicationTestCase extends TestCase
             uri: new Uri($path),
             headers: $headers,
         );
+    }
+
+    /**
+     * @param non-empty-string $key
+     */
+    protected function setEnv(string $key, string $value): void
+    {
+        if (!array_key_exists($key, $this->envBackup)) {
+            $previous = $_ENV[$key] ?? null;
+            $this->envBackup[$key] = is_string($previous) ? $previous : null;
+        }
+
+        $_ENV[$key] = $value;
     }
 }
