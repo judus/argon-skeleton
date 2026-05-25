@@ -158,16 +158,70 @@ Add application tests under:
 - `tests/Feature/`
 - `tests/Unit/`
 
+## Optional Packages
+
+The skeleton only installs the core HTTP/CLI runtime. Optional integrations are
+installed manually and registered explicitly from `AppServiceProvider` or a
+dedicated application provider.
+
+```bash
+composer require maduser/argon-monolog
+composer require maduser/argon-whoops
+composer require maduser/argon-twig
+composer require maduser/argon-eloquent
+composer require maduser/argon-doctrine
+composer require maduser/argon-phinx
+composer require maduser/argon-filesystem
+```
+
+Available integration packages:
+
+- `maduser/argon-monolog`: PSR-3 logging through Monolog.
+- `maduser/argon-whoops`: local/debug exception rendering through Whoops.
+- `maduser/argon-twig`: Twig environment and template path registration.
+- `maduser/argon-eloquent`: Eloquent database manager and connection setup.
+- `maduser/argon-doctrine`: Doctrine ORM entity manager setup.
+- `maduser/argon-phinx`: Phinx migration commands for Argon Console.
+- `maduser/argon-filesystem`: named Flysystem disks and default filesystem binding.
+
+Provider registration stays explicit:
+
+```php
+final class AppServiceProvider extends AbstractServiceProvider
+{
+    #[\Override]
+    public function register(ArgonContainer $container): void
+    {
+        $container->register([
+            MonologServiceProvider::class,
+            TwigServiceProvider::class,
+            FilesystemServiceProvider::class,
+
+            // Application-owned configuration for the integrations above.
+            LoggingServiceProvider::class,
+            TemplateServiceProvider::class,
+            StorageServiceProvider::class,
+        ]);
+    }
+}
+```
+
+Some packages require additional app-owned setup. For example, Twig needs
+template paths, database packages need connections or mappings, Phinx needs
+migration paths and environments, and filesystem disks need adapter instances.
+Install third-party adapter packages directly when needed; the skeleton does
+not auto-install optional dependencies or discover providers.
+
 ## Boundaries
 
 This skeleton intentionally does not provide:
 
 - Docker or deployment/runtime infrastructure
-- database/cache/mail services
-- view/template integration
-- ORM integration
+- cache, mail, queue, session, auth, or rate-limiting services
+- database, migration, filesystem, template, or ORM wiring by default
 - workflow integration
 - route/config/provider file indirection
 - automatic package discovery
 
-Install and wire additional packages through explicit service providers.
+Install optional integrations manually and wire them through explicit service
+providers. The skeleton remains the minimal application starting point.
