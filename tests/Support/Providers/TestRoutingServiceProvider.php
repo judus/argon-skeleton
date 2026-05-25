@@ -2,17 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Foundation\Providers;
+namespace Tests\Support\Providers;
 
-use Foundation\Http\Controllers\HomeController;
 use Maduser\Argon\Container\AbstractServiceProvider;
 use Maduser\Argon\Container\ArgonContainer;
 use Maduser\Argon\Routing\Contracts\RouterInterface;
+use Tests\Support\Http\Controllers\ErrorController;
+use Tests\Support\Http\Controllers\HealthController;
 
-/**
- * Register application routes here.
- */
-final class AppRoutingServiceProvider extends AbstractServiceProvider
+final class TestRoutingServiceProvider extends AbstractServiceProvider
 {
     #[\Override]
     public function register(ArgonContainer $container): void
@@ -20,7 +18,8 @@ final class AppRoutingServiceProvider extends AbstractServiceProvider
         $router = $container->get(RouterInterface::class);
 
         $router->group(['web'], '', static function (RouterInterface $router): void {
-            $router->get('/', HomeController::class, [], 'home');
+            $router->get('/health', HealthController::class, [], 'test.health');
+            $router->get('/error', ErrorController::class, [], 'test.error');
         });
     }
 }

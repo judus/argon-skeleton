@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Foundation\Http\Controllers;
+namespace Tests\Support\Http\Controllers;
 
 final readonly class HealthController
 {

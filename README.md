@@ -44,6 +44,7 @@ composer phpcs
 - `foundation/Providers/ConsoleCommandServiceProvider.php` registers application console commands.
 - `foundation/Providers/ErrorHandlingServiceProvider.php` wires application exception handling.
 - `foundation/Providers/AppRoutingServiceProvider.php` declares application routes and route groups.
+- The starter application ships only the `/` route; feature tests register their own test routes.
 - `src/` is intentionally empty for application code.
 - `tests/ApplicationTestCase.php` boots the real application container for integration tests.
 - `tests/Feature/` contains HTTP, console, and container-context integration examples.

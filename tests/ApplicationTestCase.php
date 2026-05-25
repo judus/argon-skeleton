@@ -16,6 +16,7 @@ use Maduser\Argon\Support\Contracts\ErrorHandlerInterface;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
+use Tests\Support\Providers\TestRoutingServiceProvider;
 use Throwable;
 
 abstract class ApplicationTestCase extends TestCase
@@ -50,6 +51,7 @@ abstract class ApplicationTestCase extends TestCase
     protected function handle(string $method, string $path, array $headers = []): ResponseInterface
     {
         $container = $this->boot('http');
+        $container->register(TestRoutingServiceProvider::class);
         $kernel = $container->get(AppHandlerInterface::class);
         $request = $this->request($method, $path, $headers);
 

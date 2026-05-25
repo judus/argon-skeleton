@@ -8,6 +8,15 @@ use Tests\ApplicationTestCase;
 
 final class HttpTest extends ApplicationTestCase
 {
+    public function testRootRouteReturnsWelcomePageThroughApplicationKernel(): void
+    {
+        $response = $this->get('/');
+
+        self::assertSame(200, $response->getStatusCode());
+        self::assertSame('text/html; charset=UTF-8', $response->getHeaderLine('Content-Type'));
+        self::assertStringContainsString('Your application skeleton is running.', (string) $response->getBody());
+    }
+
     public function testHealthRouteReturnsJsonThroughApplicationKernel(): void
     {
         $response = $this->get('/health');

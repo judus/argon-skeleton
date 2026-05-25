@@ -29,24 +29,12 @@ final readonly class HomeController
             margin: 10vh auto;
             padding: 32px;
         }
-        a {
-            color: #0969da;
-        }
-        code {
-            padding: 2px 5px;
-            border-radius: 4px;
-            background: #eaeef2;
-        }
     </style>
 </head>
 <body>
 <main>
     <h1>Argon App</h1>
     <p>Your application skeleton is running.</p>
-    <ul>
-        <li><a href="/health"><code>/health</code></a> returns a JSON health response.</li>
-        <li><a href="/error"><code>/error</code></a> demonstrates the default exception policy.</li>
-    </ul>
 </main>
 </body>
 </html>
