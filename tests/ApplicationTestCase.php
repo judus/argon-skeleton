@@ -8,6 +8,8 @@ use Foundation\Providers\ConsoleFoundationServiceProvider;
 use Foundation\Providers\HttpFoundationServiceProvider;
 use InvalidArgumentException;
 use Maduser\Argon\Container\ArgonContainer;
+use Maduser\Argon\Container\Exceptions\ContainerException;
+use Maduser\Argon\Container\Exceptions\NotFoundException;
 use Maduser\Argon\Contracts\Handler\AppHandlerInterface;
 use Maduser\Argon\Http\Kernel;
 use Maduser\Argon\Http\Message\ServerRequest;
@@ -21,6 +23,10 @@ use Throwable;
 
 abstract class ApplicationTestCase extends TestCase
 {
+    /**
+     * @throws ContainerException
+     * @throws NotFoundException
+     */
     protected function boot(string $runtime): ArgonContainer
     {
         $container = new ArgonContainer();
