@@ -82,3 +82,10 @@ jobs:
       - name: Run PHP_CodeSniffer
         if: matrix.experimental == false
         run: vendor/bin/phpcs --standard=phpcs.xml
+
+      - name: Upload coverage reports to Codecov
+        if: matrix.php-version == '8.4'
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: judus/argon-skeleton
