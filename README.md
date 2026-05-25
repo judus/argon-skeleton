@@ -37,11 +37,23 @@ composer phpcs
 - `foundation/Providers/HttpFoundationServiceProvider.php` wires HTTP packages and default middleware.
 - `foundation/Providers/ConsoleFoundationServiceProvider.php` wires Symfony Console through Argon.
 - `foundation/Providers/ErrorHandlingServiceProvider.php` wires application exception handling.
-- `foundation/Providers/RoutingServiceProvider.php` loads `routes/web.php`.
+- `foundation/Providers/AppRoutingServiceProvider.php` loads `routes/web.php`.
 - `config/providers.php` is the explicit list for application service providers.
 - `src/` is intentionally empty for application code.
 - `tests/ApplicationTestCase.php` boots the real application container for integration tests.
 - `tests/Feature/` contains HTTP, console, and container-context integration examples.
 - `tests/Unit/` is available for isolated tests when that is the better fit.
+
+## Provider Order
+
+Application providers from `config/providers.php` are registered first. Runtime-specific foundation providers are registered afterward.
+
+For the HTTP runtime, order matters:
+
+1. `ErrorHandlingServiceProvider` registers exception policies.
+2. `HttpFoundationServiceProvider` registers HTTP messages, middleware, routing services, the HTTP kernel, and default middleware.
+3. `AppRoutingServiceProvider` loads application routes into the router.
+
+For the console runtime, `ConsoleFoundationServiceProvider` registers Symfony Console and tagged commands.
 
 Optional integrations such as Monolog, Twig, Eloquent, Doctrine, or Workflow should live in explicit integration packages or application providers. The skeleton does not install them implicitly.
