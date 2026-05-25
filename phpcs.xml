@@ -22,7 +22,6 @@
     <file>foundation/</file>
     <file>src/</file>
     <file>tests/</file>
-    <file>config/</file>
     <file>public/</file>
     <file>server.php</file>
     <file>bin/console</file>
