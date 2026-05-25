@@ -1,5 +1,13 @@
 # Argon Skeleton
 
+[![PHP](https://img.shields.io/badge/php-8.2+-blue)](https://www.php.net/)
+[![Build](https://github.com/judus/argon-skeleton/actions/workflows/php.yml/badge.svg?branch=main)](https://github.com/judus/argon-skeleton/actions)
+[![codecov](https://codecov.io/gh/judus/argon-skeleton/branch/main/graph/badge.svg)](https://codecov.io/gh/judus/argon-skeleton)
+[![Psalm Level](https://shepherd.dev/github/judus/argon-skeleton/coverage.svg)](https://shepherd.dev/github/judus/argon-skeleton)
+[![Latest Version](https://img.shields.io/packagist/v/maduser/argon-skeleton.svg)](https://packagist.org/packages/maduser/argon-skeleton)
+[![Total Downloads](https://img.shields.io/packagist/dt/maduser/argon-skeleton.svg)](https://packagist.org/packages/maduser/argon-skeleton)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 Minimal application skeleton for the Argon runtime stack.
 
 This is a `composer create-project` starting point. Framework/runtime behavior
